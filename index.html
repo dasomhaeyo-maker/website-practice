@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>글밭교실 | 읽고, 생각하고, 쓰는 힘</title>
+
+  <style>
+    /* =========================
+       기본 설정
+    ========================= */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Apple SD Gothic Neo",
+        "Noto Sans KR",
+        sans-serif;
+      color: #333;
+      background: #fffdf9;
+      line-height: 1.7;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(1100px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+
+    /* =========================
+       헤더
+    ========================= */
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(255, 253, 249, 0.95);
+      border-bottom: 1px solid #eee7dd;
+      backdrop-filter: blur(10px);
+    }
+
+    .header-inner {
+      height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-size: 22px;
+      font-weight: 700;
+      color: #5b4938;
+    }
+
+    .logo span {
+      display: block;
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 1px;
+      color: #9a8875;
+      margin-top: -4px;
+    }
+
+    nav {
+      display: flex;
+      gap: 30px;
+      font-size: 14px;
+    }
+
+    nav a {
+      transition: color 0.2s;
+    }
+
+    nav a:hover {
+      color: #9a6f43;
+    }
+
+
+    /* =========================
+       메인 비주얼
+    ========================= */
+
+    .hero {
+      min-height: 620px;
+      display: flex;
+      align-items: center;
+      background:
+        radial-gradient(circle at 80% 25%, #f3e8d8 0, transparent 28%),
+        linear-gradient(135deg, #fffdf9 0%, #f8f1e7 100%);
+    }
+
+    .hero-content {
+      max-width: 700px;
+    }
+
+    .hero-label {
+      display: inline-block;
+      margin-bottom: 20px;
+      padding: 6px 14px;
+      border-radius: 30px;
+      background: #eee2d1;
+      color: #735a42;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .hero h1 {
+      font-size: clamp(38px, 6vw, 68px);
+      line-height: 1.2;
+      letter-spacing: -2px;
+      color: #40362d;
+      margin-bottom: 24px;
+    }
+
+    .hero h1 em {
+      font-style: normal;
+      color: #9a7049;
+    }
+
+    .hero p {
+      font-size: 18px;
+      color: #6d6258;
+      margin-bottom: 35px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 13px 24px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      transition: 0.2s;
+    }
+
+    .button-primary {
+      background: #69533e;
+      color: white;
+    }
+
+    .button-primary:hover {
+      background: #513e2e;
+      transform: translateY(-2px);
+    }
+
+    .button-light {
+      background: white;
+      border: 1px solid #ddd2c5;
+      color: #5b4938;
+    }
+
+    .button-light:hover {
+      background: #f7f1e9;
+    }
+
+
+    /* =========================
+       공통 섹션
+    ========================= */
+
+    section {
+      padding: 100px 0;
+    }
+
+    .section-label {
+      color: #a27a52;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-size: 36px;
+      line-height: 1.35;
+      letter-spacing: -1px;
+      color: #44382e;
+      margin-bottom: 18px;
+    }
+
+    .section-description {
+      color: #766b61;
+      max-width: 650px;
+    }
+
+
+    /* =========================
+       글밭교실 소개
+    ========================= */
+
+    .about {
+      background: white;
+    }
+
+    .about-grid {
+      margin-top: 55px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .about-card {
+      padding: 32px 28px;
+      border: 1px solid #eee5da;
+      border-radius: 14px;
+      background: #fffdf9;
+    }
+
+    .about-number {
+      font-size: 14px;
+      color: #a27a52;
+      font-weight: 700;
+      margin-bottom: 15px;
+    }
+
+    .about-card h3 {
+      font-size: 20px;
+      color: #4b3d30;
+      margin-bottom: 10px;
+    }
+
+    .about-card p {
+      font-size: 14px;
+      color: #766b61;
+    }
+
+
+    /* =========================
+       수업 안내
+    ========================= */
+
+    .class-section {
+      background: #f7f1e8;
+    }
+
+    .class-grid {
+      margin-top: 50px;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+
+    .class-card {
+      background: white;
+      padding: 35px;
+      border-radius: 14px;
+    }
+
+    .class-card h3 {
+      font-size: 21px;
+      margin-bottom: 12px;
+      color: #4b3d30;
+    }
+
+    .class-card p {
+      font-size: 14px;
+      color: #766b61;
+    }
+
+
+    /* =========================
+       독서능력 진단
+    ========================= */
+
+    .diagnosis {
+      text-align: center;
+      background: white;
+    }
+
+    .diagnosis-box {
+      max-width: 800px;
+      margin: 45px auto 0;
+      padding: 50px 30px;
+      border-radius: 18px;
+      background: #f7f1e8;
+    }
+
+    .diagnosis-box h3 {
+      font-size: 25px;
+      color: #4b3d30;
+      margin-bottom: 12px;
+    }
+
+    .diagnosis-box p {
+      font-size: 15px;
+      color: #766b61;
+      margin-bottom: 25px;
+    }
+
+
+    /* =========================
+       상담
+    ========================= */
+
+    .contact {
+      background: #5f4b38;
+      color: white;
+      text-align: center;
+    }
+
+    .contact .section-label {
+      color: #d9c1a4;
+    }
+
+    .contact .section-title {
+      color: white;
+    }
+
+    .contact p {
+      color: #e5dcd2;
+      margin-bottom: 30px;
+    }
+
+
+    /* =========================
+       푸터
+    ========================= */
+
+    footer {
+      padding: 35px 0;
+      background: #40342a;
+      color: #cfc5ba;
+      font-size: 12px;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+
+    /* =========================
+       플로팅 배너
+    ========================= */
+
+    .floating {
+      position: fixed;
+      right: 24px;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 2000;
+
+      width: 90px;
+      background: white;
+      border: 1px solid #e7ded4;
+      border-radius: 16px;
+      box-shadow: 0 8px 30px rgba(60, 45, 30, 0.14);
+      overflow: visible;
+    }
+
+    .floating a {
+      height: 78px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+      font-size: 12px;
+      color: #5c4b3b;
+      transition: 0.2s;
+    }
+
+    .floating a + a {
+      border-top: 1px solid #eee7df;
+    }
+
+    .floating a:hover {
+      background: #f8f2e9;
+    }
+
+    .floating-icon {
+      font-size: 22px;
+      margin-bottom: 4px;
+    }
+
+    .floating-close {
+      position: absolute;
+      right: -9px;
+      top: -9px;
+
+      width: 22px;
+      height: 22px;
+
+      border: 1px solid #ddd4ca;
+      border-radius: 50%;
+      background: white;
+
+      color: #777;
+      cursor: pointer;
+      font-size: 14px;
+      line-height: 18px;
+    }
+
+
+    /* =========================
+       모바일
+    ========================= */
+
+    @media (max-width: 768px) {
+
+      .container {
+        width: min(100% - 30px, 600px);
+      }
+
+      .header-inner {
+        height: 65px;
+      }
+
+      nav {
+        display: none;
+      }
+
+      .hero {
+        min-height: 560px;
+      }
+
+      .hero h1 {
+        font-size: 42px;
+        letter-spacing: -1.5px;
+      }
+
+      .hero p {
+        font-size: 16px;
+      }
+
+      section {
+        padding: 75px 0;
+      }
+
+      .section-title {
+        font-size: 30px;
+      }
+
+      .about-grid,
+      .class-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .floating {
+        top: auto;
+        right: 12px;
+        bottom: 15px;
+        transform: none;
+
+        width: auto;
+        display: flex;
+        border-radius: 14px;
+      }
+
+      .floating a {
+        width: 78px;
+        height: 65px;
+        font-size: 10px;
+      }
+
+      .floating a + a {
+        border-top: none;
+        border-left: 1px solid #eee7df;
+      }
+
+      .floating-icon {
+        font-size: 19px;
+      }
+
+      .floating-close {
+        right: -7px;
+        top: -8px;
+      }
+    }
+  </style>
+</head>
+
+
+<body>
+
+  <!-- =========================
+       헤더
+  ========================= -->
+
+  <header>
+    <div class="container header-inner">
+
+      <a href="#" class="logo">
+        글밭교실
+        <span>읽고 · 생각하고 · 쓰다</span>
+      </a>
+
+      <nav>
+        <a href="#about">글밭교실</a>
+        <a href="#class">수업 안내</a>
+        <a href="#diagnosis">독서능력진단</a>
+        <a href="#contact">상담 문의</a>
+      </nav>
+
+    </div>
+  </header>
+
+
+  <main>
+
+    <!-- =========================
+         메인
+    ========================= -->
+
+    <section class="hero">
+
+      <div class="container">
+
+        <div class="hero-content">
+
+          <div class="hero-label">
+            독서 · 논술 · 글쓰기
+          </div>
+
+          <h1>
+            생각의 씨앗이<br>
+            <em>글이 되는 곳</em>
+          </h1>
+
+          <p>
+            책을 읽고, 질문하고, 생각하고,<br>
+            나만의 언어로 표현하는 힘을 기릅니다.
+          </p>
+
+          <div class="hero-buttons">
+
+            <a href="#diagnosis"
+               class="button button-primary">
+              독서능력진단 알아보기
+            </a>
+
+            <a href="#contact"
+               class="button button-light">
+              상담 문의
+            </a>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         글밭교실
+    ========================= -->
+
+    <section id="about" class="about">
+
+      <div class="container">
+
+        <div class="section-label">
+          ABOUT GEULBAT
+        </div>
+
+        <h2 class="section-title">
+          읽는 것에서<br>
+          생각하는 것으로
+        </h2>
+
+        <p class="section-description">
+          글밭교실은 책을 많이 읽는 것에 그치지 않고,
+          읽은 내용을 자신의 생각으로 연결하고
+          글로 표현하는 과정을 중요하게 생각합니다.
+        </p>
+
+
+        <div class="about-grid">
+
+          <div class="about-card">
+            <div class="about-number">01</div>
+            <h3>깊이 읽기</h3>
+            <p>
+              책의 내용을 이해하고 핵심을 찾으며
+              글의 구조와 맥락을 살펴봅니다.
+            </p>
+          </div>
+
+          <div class="about-card">
+            <div class="about-number">02</div>
+            <h3>질문하고 생각하기</h3>
+            <p>
+              질문을 통해 자신의 생각을 확장하고
+              다양한 관점에서 내용을 바라봅니다.
+            </p>
+          </div>
+
+          <div class="about-card">
+            <div class="about-number">03</div>
+            <h3>글로 표현하기</h3>
+            <p>
+              생각을 정리하고 자신의 언어로
+              논리적으로 표현하는 연습을 합니다.
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         수업 안내
+    ========================= -->
+
+    <section id="class" class="class-section">
+
+      <div class="container">
+
+        <div class="section-label">
+          CLASS
+        </div>
+
+        <h2 class="section-title">
+          글밭교실 수업
+        </h2>
+
+        <p class="section-description">
+          읽기와 생각하기, 쓰기를 하나의 과정으로 연결합니다.
+        </p>
+
+
+        <div class="class-grid">
+
+          <div class="class-card">
+            <h3>📚 독서논술</h3>
+            <p>
+              문학과 비문학을 읽으며 내용 이해,
+              핵심 파악, 질문, 추론, 요약 등의
+              읽기 전략을 익힙니다.
+            </p>
+          </div>
+
+          <div class="class-card">
+            <h3>✏️ 글쓰기</h3>
+            <p>
+              자신의 생각을 구조화하고
+              근거를 바탕으로 문장과 글을
+              완성하는 연습을 합니다.
+            </p>
+          </div>
+
+          <div class="class-card">
+            <h3>🏛️ 역사논술</h3>
+            <p>
+              역사적 사건의 원인과 결과,
+              인물과 시대적 맥락을 살펴보며
+              역사적 사고력을 키웁니다.
+            </p>
+          </div>
+
+          <div class="class-card">
+            <h3>🔎 비판적 읽기</h3>
+            <p>
+              글의 주장과 근거를 살펴보고
+              여러 관점을 비교하며 자신의
+              판단을 논리적으로 표현합니다.
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         독서능력 진단
+    ========================= -->
+
+    <section id="diagnosis" class="diagnosis">
+
+      <div class="container">
+
+        <div class="section-label">
+          READING DIAGNOSIS
+        </div>
+
+        <h2 class="section-title">
+          우리 아이의 독서능력,<br>
+          먼저 살펴보세요.
+        </h2>
+
+        <p class="section-description" style="margin: 0 auto;">
+          아이의 현재 독서능력을 살펴보고
+          앞으로 어떤 부분을 보완하면 좋을지
+          함께 이야기합니다.
+        </p>
+
+
+        <div class="diagnosis-box">
+
+          <h3>독서능력진단평가</h3>
+
+          <p>
+            읽기 이해와 어휘, 사고력 등을 살펴보고
+            아이에게 필요한 학습 방향을 상담합니다.
+          </p>
+
+          <a href="#contact"
+             class="button button-primary">
+            진단 및 상담 문의
+          </a>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         상담
+    ========================= -->
+
+    <section id="contact" class="contact">
+
+      <div class="container">
+
+        <div class="section-label">
+          CONTACT
+        </div>
+
+        <h2 class="section-title">
+          글밭교실이 궁금하신가요?
+        </h2>
+
+        <p>
+          수업 내용과 아이의 독서·글쓰기 학습에 대해
+          편하게 문의해주세요.
+        </p>
+
+        <a href="mailto:example@email.com"
+           class="button button-light">
+          상담 문의하기
+        </a>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- =========================
+       푸터
+  ========================= -->
+
+  <footer>
+
+    <div class="container footer-inner">
+
+      <div>
+        <strong>글밭교실</strong>
+        <br>
+        생각의 씨앗이 자라나 글이 되는 곳
+      </div>
+
+      <div>
+        © 2026 글밭교실. All rights reserved.
+      </div>
+
+    </div>
+
+  </footer>
+
+
+  <!-- =========================
+       플로팅 배너
+  ========================= -->
+
+  <div class="floating" id="floatingBanner">
+
+    <a href="#contact">
+      <span class="floating-icon">💬</span>
+      상담 문의
+    </a>
+
+    <a href="#diagnosis">
+      <span class="floating-icon">📖</span>
+      독서 진단
+    </a>
+
+    <a href="#class">
+      <span class="floating-icon">✏️</span>
+      수업 안내
+    </a>
+
+    <button
+      class="floating-close"
+      onclick="document.getElementById('floatingBanner').style.display='none';"
+      aria-label="배너 닫기">
+      ×
+    </button>
+
+  </div>
+
+
+</body>
+</html>
